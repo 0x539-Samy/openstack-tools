@@ -76,7 +76,8 @@ StartJob() {
     mount -o rw /dev/$PartChoice $MountPoint &> /dev/null
     
     ##TODO ==>add mount of partition in boot on fstab file   
- 
+    blkid -s UUID /dev/$PartChoice |awk -F': ' '{print $2, "$MountPoint ext4 defaults 0 1"}' |sudo tee -a /etc/fstab 
+
     #confirm job is done
     echo -e "\n$OK[Success]$RESET Partition $PartChoice mounted in $MountPoint successfully\n\n"
     }
