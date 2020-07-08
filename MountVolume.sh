@@ -2,7 +2,7 @@
 
 #################################################################
 #Author :  @BELARBI Samy  15/11/2017				#
-##TODO: colors, manage errors, add mount in fstab, functions	#
+#Update 11/10/2019 Add auto config fstab			#
 #################################################################
 
 #Colors
@@ -75,7 +75,7 @@ StartJob() {
     mkfs.ext4 /dev/$PartChoice &> /dev/null
     mount -o rw /dev/$PartChoice $MountPoint &> /dev/null
     
-    ##TODO ==>add mount of partition in boot on fstab file   
+    #add mount of partition in boot on fstab file   
     blkid -s UUID /dev/$PartChoice |awk -F': ' '{print $2, "$MountPoint ext4 defaults 0 1"}' |sudo tee -a /etc/fstab 
 
     #confirm job is done
